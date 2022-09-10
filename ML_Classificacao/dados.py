@@ -4,7 +4,7 @@ import csv
 def carregar_dados():
     X = []
     Y = []
-    arquivo = open('./resource/acesso.csv')
+    arquivo = open('./resource/acesso.csv', 'r')
     leitor = csv.reader(arquivo)
     leitor.__next__()
     for home, como_funciona, contato, comprou in leitor:
