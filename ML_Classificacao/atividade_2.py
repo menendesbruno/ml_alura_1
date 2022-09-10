@@ -1,7 +1,7 @@
-from dados import carregar_dados
+from dados import carregar_acesso
 from sklearn.naive_bayes import MultinomialNB
 
-X, Y = carregar_dados()
+X, Y = carregar_acesso()
 treino_dados = X[:90]
 treino_marcacoes = Y[:90]
 teste_dados = X[-9:]
