@@ -1,4 +1,5 @@
 import pandas as pd
+from collections import Counter
 from sklearn.naive_bayes import MultinomialNB
 
 df = pd.read_csv('./resource/busca.csv')
@@ -25,15 +26,17 @@ model = MultinomialNB()
 model.fit(treino_dados, treino_marcacoes)
 
 resultado = model.predict(teste_dados)
+acertos = resultado == teste_marcacoes
 
-diferencas = resultado - teste_marcacoes
-
-acertos = [d for d in diferencas if d == 0]
-total_de_acertos = len(acertos)
+total_de_acertos = sum(acertos)
 total_de_elementos = len(teste_dados)
 
-taxa_de_acerto = 100.0 * total_de_acertos / total_de_elementos
+taxa_de_acerto = 100.0 * (total_de_acertos / total_de_elementos)
 
-print(taxa_de_acerto)
+acerto_base = max(Counter(teste_marcacoes).values())
+taxa_de_acerto_base = 100 * (acerto_base / len(teste_marcacoes))
+
+print("Taxa de acerto base: ", taxa_de_acerto_base)
+print("Taxa de acerto algoritmo: ", taxa_de_acerto)
 print(total_de_elementos)
 
