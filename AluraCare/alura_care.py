@@ -8,6 +8,7 @@ from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import chi2, RFE, RFECV
 from sklearn.metrics import confusion_matrix
 from sklearn.decomposition import PCA
+from sklearn.manifold import TSNE
 import seaborn as sns
 import matplotlib.pyplot as plt
 from numpy import random
@@ -118,3 +119,8 @@ print('Resultado da classificação RFECV: %.2f' % score)
 
 pca = PCA(n_components=2)
 valores_exames_v5 = pca.fit_transform(valores_exames_v4)
+
+tnse = TSNE(n_components=2)
+valores_exames_v6 = tnse.fit_transform(valores_exames_v4)
+plt.figure(figsize=(14, 8))
+sns.scatterplot(x=valores_exames_v6[:, 0], y=valores_exames_v6[:, 1], hue=diagnostico)
